@@ -51,8 +51,12 @@ from .generation import (
 from .bounds import (
     B_dominating,
     B_fundamental,
+    B_min_k_connected,
     B_order,
     B_star,
+    B_star_paths,
+    Q,
+    c_complete,
     lower_bound,
 )
 from .spectra import (
@@ -92,8 +96,12 @@ __all__ = [
     "three_connected_graphs",
     "B_fundamental",
     "B_star",
+    "B_star_paths",
     "B_dominating",
     "B_order",
+    "B_min_k_connected",
+    "Q",
+    "c_complete",
     "lower_bound",
     "Witness",
     "cycle_spectrum",

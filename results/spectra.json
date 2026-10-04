@@ -1,0 +1,124 @@
+{
+  "S_1": "all positive integers",
+  "S_1_missing_below": [],
+  "S_2_agrees_with_published": true,
+  "S_2_bound": 50,
+  "S_2_missing_below_bound": [
+    2,
+    4,
+    5,
+    8,
+    9,
+    16
+  ],
+  "S_2_published_exceptions": [
+    2,
+    4,
+    5,
+    8,
+    9,
+    16
+  ],
+  "S_2_size": 5216,
+  "S_3_agrees_with_conjecture": true,
+  "S_3_bound": 50,
+  "S_3_conjectured_exceptions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    20,
+    27,
+    30,
+    32,
+    33,
+    34
+  ],
+  "S_3_missing_below_bound": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    20,
+    27,
+    30,
+    32,
+    33,
+    34
+  ],
+  "S_3_size": 5179,
+  "S_4_size_small_orders": 30,
+  "S_5_size_small_orders": 5,
+  "_environment": {
+    "git_commit": "8997f7ea66ec5d27aa450394e2f60af74f35971b",
+    "igraph": "1.0.0",
+    "matplotlib": "3.11.1",
+    "networkx": "3.6.1",
+    "numpy": "2.4.6",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "python": "3.14.6",
+    "randomness_used": false,
+    "seed": 0,
+    "timestamp_utc": "2026-10-04T15:32:57Z"
+  },
+  "connectivity_histogram": {
+    "3": 127,
+    "4": 25,
+    "5": 4,
+    "6": 1
+  },
+  "distinct_counts_per_order": {
+    "2-connected": {
+      "3": 1,
+      "4": 3,
+      "5": 8,
+      "6": 34,
+      "7": 156,
+      "8": 823,
+      "9": 5216
+    },
+    "3-connected": {
+      "4": 1,
+      "5": 3,
+      "6": 17,
+      "7": 104,
+      "8": 761,
+      "9": 5153
+    }
+  },
+  "kappa_small": {
+    "13": 3,
+    "14": 3,
+    "15": 3,
+    "7": 3
+  },
+  "max_order_examined": 9,
+  "mu_small": {
+    "13": 5,
+    "14": 6,
+    "15": 6,
+    "7": 4
+  }
+}

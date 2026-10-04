@@ -1,0 +1,76 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: tests (python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test
+        run: python -m pytest tests -q --maxfail=1
+
+  smoke:
+    name: experiment smoke run (max_n = 6)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run the pipeline on small orders
+        run: python experiments/run_all.py --max-n 6
+      - name: Check that the key claims hold
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          r = pathlib.Path("results")
+          thm = json.loads((r / "path_lemma_and_theorem_a.json").read_text())
+          assert thm["path_lemma"]["recurrence_verified"] is True
+          assert thm["path_lemma"]["violations"] == []
+          assert thm["theorem_a"]["theorem_a_verified"] is True
+          cone = json.loads((r / "cone_theorem.json").read_text())
+          assert cone["theorem_b_verified"] is True
+          print("pipeline claims verified")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results-and-figures-smoke
+          path: |
+            results/
+            figures/
+
+  generators:
+    name: brute-force validation of the generators (n <= 6)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Cross-validate generators against all graphs on <= 6 vertices
+        run: python scripts/validate_generators.py 6

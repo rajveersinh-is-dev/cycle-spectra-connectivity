@@ -1,0 +1,79 @@
+{
+  "_environment": {
+    "git_commit": "8997f7ea66ec5d27aa450394e2f60af74f35971b",
+    "igraph": "1.0.0",
+    "matplotlib": "3.11.1",
+    "networkx": "3.6.1",
+    "numpy": "2.4.6",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "python": "3.14.6",
+    "randomness_used": false,
+    "seed": 0,
+    "timestamp_utc": "2026-10-04T15:33:51Z"
+  },
+  "identity_c_K1vF_verified": true,
+  "rows": [
+    {
+      "base_order": 3,
+      "classes": 1,
+      "max_cone_cycles": 7,
+      "min_cone_cycles": 7,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 7,
+      "seconds": 0.0
+    },
+    {
+      "base_order": 4,
+      "classes": 3,
+      "max_cone_cycles": 37,
+      "min_cone_cycles": 13,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 13,
+      "seconds": 0.0
+    },
+    {
+      "base_order": 5,
+      "classes": 10,
+      "max_cone_cycles": 197,
+      "min_cone_cycles": 21,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 21,
+      "seconds": 0.0
+    },
+    {
+      "base_order": 6,
+      "classes": 56,
+      "max_cone_cycles": 1172,
+      "min_cone_cycles": 31,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 31,
+      "seconds": 0.0
+    },
+    {
+      "base_order": 7,
+      "classes": 468,
+      "max_cone_cycles": 8018,
+      "min_cone_cycles": 43,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 43,
+      "seconds": 0.0
+    },
+    {
+      "base_order": 8,
+      "classes": 7123,
+      "max_cone_cycles": 62814,
+      "min_cone_cycles": 57,
+      "minimiser_is_the_cycle": true,
+      "num_minimisers": 1,
+      "predicted_min": 57,
+      "seconds": 0.0
+    }
+  ],
+  "statement": "For every 2-connected graph F on m >= 3 vertices, c(K_1 v F) >= m(m-1)+1, with equality iff F is a cycle.",
+  "theorem_b_verified": true
+}

@@ -14,6 +14,7 @@ from typing import Iterable, Sequence
 __all__ = [
     "Graph",
     "complete_graph",
+    "flower",
     "wheel",
     "cycle_graph",
     "theta_graph",
@@ -142,6 +143,31 @@ def complete_graph(n: int) -> Graph:
     """The complete graph ``K_n``."""
     full = (1 << n) - 1
     return Graph(n, [full & ~(1 << v) for v in range(n)])
+
+
+def flower(t: int) -> Graph:
+    """A bouquet of ``t`` triangles: connected, with exactly ``t`` cycles.
+
+    All ``t`` triangles share the single vertex ``0``.  Since ``0`` is a cut
+    vertex, every cycle lies inside one triangle, so ``c = t``.  This is the
+    witness that ``S_1`` (cycle counts of connected graphs) is the set of all
+    positive integers; note that for ``t >= 2`` the graph is *not* 2-connected,
+    which is exactly why 2-connectivity is the interesting place to start.
+
+    A chain of triangles glued one after another would also work, but it has
+    exponentially many simple paths (a path can traverse every triangle), which
+    makes cycle enumeration by path search expensive; in a bouquet a simple path
+    uses at most two triangles, so the number of paths is quadratic in ``t``.
+    """
+    if t < 1:
+        raise ValueError("t must be positive")
+    adj = [0] * (1 + 2 * t)
+    for i in range(t):
+        a, b = 1 + 2 * i, 2 + 2 * i
+        for x, y in ((0, a), (a, b), (b, 0)):
+            adj[x] |= 1 << y
+            adj[y] |= 1 << x
+    return Graph(1 + 2 * t, adj)
 
 
 def cycle_graph(n: int) -> Graph:

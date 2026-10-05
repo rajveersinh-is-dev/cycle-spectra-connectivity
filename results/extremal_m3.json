@@ -1,6 +1,6 @@
 {
   "_environment": {
-    "git_commit": "8997f7ea66ec5d27aa450394e2f60af74f35971b",
+    "git_commit": "d68560e47f850b94a698bebf264f0666edacae67",
     "igraph": "1.0.0",
     "matplotlib": "3.11.1",
     "networkx": "3.6.1",
@@ -9,7 +9,7 @@
     "python": "3.14.6",
     "randomness_used": false,
     "seed": 0,
-    "timestamp_utc": "2026-10-04T15:28:32Z"
+    "timestamp_utc": "2026-10-05T05:43:08Z"
   },
   "all_bounds_respected": true,
   "extremal_function_m3": [

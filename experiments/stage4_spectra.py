@@ -22,8 +22,10 @@ from common import (
 )
 from cycle_spectra import (
     count_cycles,
+    is_connected,
     min_order_realising,
     missing_below,
+    flower,
     three_connected_graphs,
     two_connected_graphs,
     vertex_connectivity,
@@ -35,15 +37,18 @@ BOUND = 50
 def main(max_n: int = 9) -> dict:
     print("stage 4: spectra")
     # ---- S_1 -------------------------------------------------------------
+    # A bouquet of t triangles is connected and has exactly t cycles, so S_1 is
+    # all positive integers.  We *verify* the construction rather than assert it.
     s1 = set()
-    for n in range(1, max_n + 1):
-        for g in two_connected_graphs(min(n, 3)) if n <= 3 else []:
-            s1.add(count_cycles(g))
-    # a necklace of t triangles is connected with exactly t cycles
-    s1 = set(range(1, 400))
+    bouquet_ok = True
+    for t in range(1, 401):
+        g = flower(t)
+        if not is_connected(g):
+            bouquet_ok = False
+        s1.add(count_cycles(g))
     s1_missing = missing_below(s1, BOUND)
-    print(f"  k=1 (connected): S_1 = all positive integers (witness: necklace of t "
-          f"triangles). missing below {BOUND}: {s1_missing}")
+    print(f"  k=1 (connected): bouquets 1..400 verified ({'ok' if bouquet_ok else 'FAILED'}), "
+          f"missing in [1,{BOUND}]: {s1_missing}")
 
     # ---- S_2 and S_3 -----------------------------------------------------
     s2: set[int] = set()
@@ -97,7 +102,8 @@ def main(max_n: int = 9) -> dict:
 
     payload = {
         "max_order_examined": max_n,
-        "S_1": "all positive integers",
+        "S_1": "all positive integers (verified for 1..400 via the bouquet construction)",
+        "S_1_bouquets_verified": bouquet_ok,
         "S_1_missing_below": s1_missing,
         "S_2_missing_below_bound": miss2,
         "S_2_bound": BOUND,

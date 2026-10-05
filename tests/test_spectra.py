@@ -86,3 +86,21 @@ def test_handfacts_2connected_counts():
     assert 5 not in counts
     assert 6 in counts
     assert 7 in counts
+
+
+def test_bouquet_construction_realises_every_count():
+    """S_1 is all positive integers: the bouquet of t triangles has c = t."""
+    from cycle_spectra import flower, is_connected
+
+    for t in range(1, 151):
+        g = flower(t)
+        assert is_connected(g)
+        assert count_cycles(g) == t, t
+
+
+def test_bouquet_is_not_2connected():
+    """t >= 2: the shared vertex is a cut vertex, so it is *not* 2-connected."""
+    from cycle_spectra import flower, is_2connected
+
+    for t in range(2, 40):
+        assert not is_2connected(flower(t))

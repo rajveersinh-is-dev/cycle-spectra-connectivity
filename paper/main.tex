@@ -255,8 +255,8 @@ the convention of \cite{mcculloch2026}.
 
 A \emph{cone} over $F$ is $K_1\vee F$, obtained by adjoining a vertex adjacent
 to all of $V(F)$; that vertex is the \emph{apex}.  A wheel is $C_n\vee K_1$.
-Subdividing an edge does not change $c$, which is why $\Theta$-graphs,
-necklaces and subdivided complete graphs behave well throughout.
+Subdividing an edge does not change $c$, which is why $\Theta$-graphs and
+subdivided complete graphs behave well throughout.
 
 For a graph $F$ on $m$ vertices write
 \[
@@ -455,8 +455,9 @@ Lemma~\ref{lem:path},
   c(G) = \cF + \sum_{\{x,y\}\in\binom{N(v)}{2}} p_F(x,y)
        \ \ge\ c(K_k) + \binom{k}{2}Q_k ,
 \]
-using the induction hypothesis for $\cF$, the path lemma for each summand, and
-$d_G(v)\ge k$ for the number of summands.
+where $\cF\ge c(K_k)$ is the induction hypothesis for $k\ge 4$ and
+Corollary~\ref{cor:k2} for $k=3$; the path lemma supplies each summand, and
+$d_G(v)\ge k$ supplies the number of summands.
 
 On the other hand, applying Lemma~\ref{lem:cone} to $K_{k+1}$ at a vertex $v$
 shows that the cycles of $K_{k+1}$ through $v$ are in bijection with a pair
@@ -560,9 +561,10 @@ but does not say how large a search is needed, and for $S_3$ the relevant
 threshold is unknown (Section~\ref{sec:limitations}).
 
 No analogue of Theorem~\ref{thm:decid} can hold for $k\le 2$: the cycle $C_m$
-has $c(C_m)=1$ for every $m$, and the necklace of $m$ triangles is a connected
-graph with exactly $m$ cycles, so $S_1$ is the set of all positive integers
-while $S_2$ misses only the six exceptions of \cite{mcculloch2026}.
+has $c(C_m)=1$ for every $m$, and the bouquet of $m$ triangles --- all $m$
+triangles sharing one vertex --- is a connected graph with exactly $m$ cycles,
+so $S_1$ is the set of all positive integers while $S_2$ misses only the six
+exceptions of \cite{mcculloch2026}.
 
 \section{Computational results}\label{sec:comp}
 
@@ -636,8 +638,10 @@ Figure~\ref{fig:thmA} plots these against the predicted values.
 $S_3$ below $51$ from our own generators gives:
 
 \begin{itemize}[leftmargin=*,nosep]
-\item $S_1 = \mathbb{Z}_{>0}$: every $m\ge 1$ is realised by the necklace of
-  $m$ triangles, a connected graph with exactly $m$ cycles.
+\item $S_1 = \mathbb{Z}_{>0}$: every $m\ge 1$ is realised by the bouquet of
+  $m$ triangles (all $m$ triangles sharing a single vertex), a connected graph
+  with exactly $m$ cycles.  The construction is verified computationally for
+  $m\le 400$.
 \item $S_2$ misses exactly $\{2,4,5,8,9,16\}$ in $[1,50]$, i.e.\ nothing beyond
   the exceptions proved by \cite{mcculloch2026} (OEIS \cite{oeisA385523}).
 \item $S_3$ misses exactly
@@ -723,17 +727,18 @@ implementation in \texttt{src/cycle\_spectra}.
 \item \textbf{Generation.}  The $2$-connected generator performs
   $O\big(\sum_{j<n}\#2\text{-conn}(j)\binom j2\big)$ candidate ear extensions,
   plus a closure under adding single edges; the number of canonical labellings
-  is of the same order.  Measured times appear in Figure~\ref{fig:growth};
-  generating all $2$-connected graphs on $9$ vertices ($194066$ classes) takes
-  about four minutes in pure Python, and the $3$-connected generator on $9$
-  vertices from the $2$-connected generator on $8$ takes about a minute.  The
-  $3$-connected generator on $10$ vertices did not finish within fifty minutes
-  on the same machine.
+  is of the same order.  Measured times appear in Figure~\ref{fig:growth}; on the
+  machine used for the release (Python 3.14, no compiled extensions) generating
+  all $2$-connected graphs on $9$ vertices ($194066$ classes) takes $215$~s, the
+  $3$-connected graphs on $9$ vertices ($80890$ classes) take $125$~s, and the
+  $2$-connected graphs on $8$ vertices take $4.3$~s.  The $3$-connected
+  generator on $10$ vertices did not finish within fifty minutes on the same
+  machine, which is why $m_3(10)$ is not reported.
 \item \textbf{Asymptotics.}  The class counts of Table~1 have strictly
-  increasing successive ratios (from $3$ at $n=3,4$ to about $27$ between $n=8$
-  and $n=9$), so enumeration is super-exponential in $n$ by nature, not by
-  weakness of the implementation.  Nothing in the proofs depends on the
-  enumeration.
+  increasing successive ratios --- $3$ from $n=3$ to $4$, then $3.3$, $5.6$,
+  $8.4$, $15.2$, and $27.2$ from $n=8$ to $9$ --- so enumeration is
+  super-exponential in $n$ by nature, not by weakness of the implementation.
+  Nothing in the proofs depends on the enumeration.
 \end{itemize}
 
 \begin{figure}[t]

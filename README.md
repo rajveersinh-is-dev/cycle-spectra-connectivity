@@ -103,7 +103,7 @@ floating point**.
 * **Theorem A.**  Verified on all $80890$ 3-connected classes with $n\le 9$:
   the minimum at each level $k=3..8$ equals $c(K_{k+1})$, attained by $K_{k+1}$
   alone.
-* **90 tests** run in about 3 minutes (`python -m pytest tests -q`).
+* **92 tests** run in about 3 minutes (`python -m pytest tests -q`).
 
 ## Repository Structure
 
@@ -117,7 +117,7 @@ src/cycle_spectra/
     bounds.py          proved lower bounds (B_fundamental, B_star, ...)
     spectra.py         spectra, extremal function, mu(m) and kappa(m)
     handfacts.py       hand-provable small facts
-tests/          90 tests, incl. brute-force cross-validation
+tests/          92 tests, incl. brute-force cross-validation
 experiments/    the pipeline: stages 1-6, run_all.py
 scripts/        standalone probes and the brute-force validator
 results/        machine-generated JSON + summary.md (provenance block)
@@ -130,7 +130,7 @@ docs/           literature review, novelty audit, methodology, notes
 ```bash
 pip install -r requirements.txt          # numpy, networkx, igraph, matplotlib, pytest
 
-python -m pytest tests -q                # ~3 min: 90 tests
+python -m pytest tests -q                # ~3 min: 92 tests
 python experiments/run_all.py            # ~12 min: all results and figures
 python experiments/run_all.py --max-n 7  # ~1 min smoke run
 python scripts/validate_generators.py 7  # brute-force validation of the generators

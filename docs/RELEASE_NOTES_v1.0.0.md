@@ -50,13 +50,15 @@ $Q_2=1$, $Q_{r+1}=1+(r-1)Q_r$.  For $r\ge3$ equality forces $F=K_{r+1}$.
 * **Extremal function:** $m_3(4..9)=7,13,14,24,26,42$, minimisers identified.
   From $n=6$ onwards wheels are *not* extremal (the triangular prism beats $W_6$:
   14 vs 21).
-* **Spectra:** $S_2$ misses exactly $\{2,4,5,8,9,16\}$ below 51 — the list proved
-  by McCulloch, McKay, Salahshoori & Zaslavsky (2026) — and $S_3$ misses exactly
-  the 21 integers **conjectured** in that paper,
+* **Spectra:** $S_1=\mathbb{Z}_{>0}$ (every $m$ is realised by a bouquet of $m$
+  triangles; verified for $m\le400$).  $S_2$ misses exactly
+  $\{2,4,5,8,9,16\}$ below 51 — the list proved by McCulloch, McKay,
+  Salahshoori & Zaslavsky (2026) — and $S_3$ misses exactly the 21 integers
+  **conjectured** in that paper,
   $\{1,\dots,6,\,8,\dots,12,\,16,\dots,20,\,27,\,30,\,32,\,33,\,34\}$.  This is
   an independent confirmation of their Conjecture 6(a) in this range, obtained
   with a different generator; it is **not** a proof of that conjecture.
-* 90 tests in ~3 minutes; six generated figures; every number reproducible
+* 92 tests in ~3 minutes; six generated figures; every number reproducible
   bit-for-bit from a clean clone.
 
 ## Reproducing

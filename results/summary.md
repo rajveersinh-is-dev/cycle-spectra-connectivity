@@ -53,7 +53,7 @@ All values respect the conjectured bound: **True**
 
 ## 4. Spectra
 
-- `S_1` (connected graphs): all positive integers
+- `S_1` (connected graphs): all positive integers (verified for 1..400 via the bouquet construction)
 - `S_2` (2-connected): |S_2| = 5216; missing in [1,50] = [2, 4, 5, 8, 9, 16]
   - consistent with the proved exception list [2, 4, 5, 8, 9, 16]: **True**
 - `S_3` (3-connected): |S_3| = 5179; missing in [1,50] = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 16, 17, 18, 19, 20, 27, 30, 32, 33, 34]
@@ -81,8 +81,8 @@ numpy: 2.4.6
 networkx: 3.6.1
 igraph: 1.0.0
 matplotlib: 3.11.1
-git_commit: 8997f7ea66ec5d27aa450394e2f60af74f35971b
+git_commit: d68560e47f850b94a698bebf264f0666edacae67
 seed: 0
 randomness_used: False
-timestamp_utc: 2026-10-04T15:47:10Z
+timestamp_utc: 2026-10-05T05:46:52Z
 ```

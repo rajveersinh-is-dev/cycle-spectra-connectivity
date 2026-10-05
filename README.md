@@ -228,7 +228,7 @@ claim-by-claim assessment of what is new.
   author = {Pardeshi, Rajveersinh},
   title  = {Cycle Counts of k-Connected Graphs: A Sharp Minimum, a Decidability
             Theorem, and the 3-Connected Spectrum},
-  note   = {Preprint v1.0.0, \url{https://github.com/daveaddams91-dev/cycle-spectra-connectivity}},
+  note   = {Preprint v1.0.0, \url{https://github.com/rajveersinh-is-dev/cycle-spectra-connectivity}},
   year   = {2026}
 }
 ```

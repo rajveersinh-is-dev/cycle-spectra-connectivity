@@ -86,5 +86,5 @@ First public release.  No prior public version, no claim of peer review.
   environment matching, dangling `\ref`/`\cite`, missing figures).
 - Paper `paper/main.tex` compiles standalone; no BibTeX required.
 
-[1.0.1]: https://github.com/daveaddams91-dev/cycle-spectra-connectivity/releases/tag/v1.0.1
-[1.0.0]: https://github.com/daveaddams91-dev/cycle-spectra-connectivity/releases/tag/v1.0.0
+[1.0.1]: https://github.com/rajveersinh-is-dev/cycle-spectra-connectivity/releases/tag/v1.0.1
+[1.0.0]: https://github.com/rajveersinh-is-dev/cycle-spectra-connectivity/releases/tag/v1.0.0

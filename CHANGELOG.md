@@ -4,6 +4,35 @@ All notable changes to this project are documented here.  The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-10-05
+
+Patch release.  No change to any theorem statement, numerical result or figure;
+one proof gap in `v1.0.0` is closed and the disclosure is retained in the paper.
+
+### Fixed
+
+- **Proof gap in the Path Lemma's `r = 3` equality case** (`paper/main.tex`,
+  `docs/novelty_audit.md` §E).  The `v1.0.0` proof invoked the induction
+  hypothesis at `r - 1 = 2`, whose equality statement is false, so
+  `F - x = K_3` did not follow.  The statement was true and verified on all
+  `3`-connected graphs with `n <= 9`; the proof did not establish it.
+  - Added **Lemma (paths in 2-connected graphs)**: in a `2`-connected graph `H`,
+    `p_H(a, b) >= 2`, and `p_H(a, b) = 2` iff `H` is a cycle.
+  - Redid the `r = 3` case from it; the `r >= 4` case is unchanged.
+  - Corrected `Q_r >= Q_4 = 5` to `Q_r >= Q_3 = 2` in the same argument (the
+    former is false at `r = 3`).
+  - Theorem A was unaffected; the paper now records that its equality analysis
+    never used the Path Lemma's equality statement.
+
+### Added
+
+- Pipeline stage 2a' checks the new lemma on all `2`-connected graphs with
+  `n <= 8`: `210 233` pairs, 6 cycles, 0 violations.
+- `scripts/check_paper.py` statically validates `paper/main.tex`.  The paper
+  also now compiles with **zero** undefined references or citations
+  (verified with `tectonic`; 15 pages).
+- Regression tests for the new lemma; the suite is 97 tests.
+
 ## [1.0.0] - 2026-10-04
 
 First public release.  No prior public version, no claim of peer review.
@@ -57,4 +86,5 @@ First public release.  No prior public version, no claim of peer review.
   environment matching, dangling `\ref`/`\cite`, missing figures).
 - Paper `paper/main.tex` compiles standalone; no BibTeX required.
 
+[1.0.1]: https://github.com/daveaddams91-dev/cycle-spectra-connectivity/releases/tag/v1.0.1
 [1.0.0]: https://github.com/daveaddams91-dev/cycle-spectra-connectivity/releases/tag/v1.0.0

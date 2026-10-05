@@ -8,6 +8,8 @@ dist/
 paper/*.aux
 paper/*.log
 paper/*.out
-paper/*.pdf
+paper/*.toc
+# The compiled paper is tracked on purpose (added by the author); ignore only
+# intermediate build artefacts from local pdflatex runs.
 !paper/main.pdf
 results/tmp*

@@ -5,7 +5,9 @@ that question sharply, proves that the cycle-count spectrum of every
 connectivity class is computable, and computes the extremal function and the
 spectrum for 3-connected graphs exactly up to order 9.
 
-*Paper:* [`paper/main.tex`](paper/main.tex) · *Headline result:* Theorem A below.
+**Author: Rajveersinh Pardeshi.**  *Paper:* [`paper/main.tex`](paper/main.tex)
+(compiled PDF: [`paper/main.pdf`](paper/main.pdf)) · *Headline result:* Theorem A
+below.
 
 ---
 
@@ -142,10 +144,10 @@ recording Python, library versions, git commit, timestamp and
 Re-running from a clean clone reproduces the values quoted in the paper
 bit-for-bit.
 
-**Paper.**  `paper/main.tex` compiles standalone with any LaTeX distribution
-(`pdflatex main.tex`); no BibTeX is required, and `references.bib` is provided
-for users who prefer it.  Figures are referenced as `../figures/*.png`, so
-compile from inside `paper/`.
+**Paper.**  `paper/main.tex` compiles standalone with any LaTeX distribution;
+no BibTeX is required, and `references.bib` is provided for users who prefer it.
+The compiled PDF (`paper/main.pdf`) is tracked and figures are referenced as
+`../figures/*.png`, so compile from inside `paper/`.
 
 ## Examples
 
@@ -204,10 +206,10 @@ claim-by-claim assessment of what is new.
 
 ```bibtex
 @misc{cycle-spectra,
+  author = {Pardeshi, Rajveersinh},
   title  = {Cycle Counts of k-Connected Graphs: A Sharp Minimum, a Decidability
             Theorem, and the 3-Connected Spectrum},
-  note   = {Preprint; source, data and code at
-            https://github.com/daveaddams91-dev/cycle-spectra-connectivity},
+  note   = {Preprint v1.0.0, \url{https://github.com/daveaddams91-dev/cycle-spectra-connectivity}},
   year   = {2026}
 }
 ```

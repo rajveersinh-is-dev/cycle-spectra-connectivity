@@ -45,7 +45,7 @@ First public release.  No prior public version, no claim of peer review.
 
 ### Infrastructure
 
-- 90 tests covering primitives, generators, bounds, spectra and the stated
+- 92 tests covering primitives, generators, bounds, spectra and the stated
   theorems; the suite runs in about three minutes.
 - `experiments/run_all.py` writes JSON results with a provenance block
   (versions, git commit, timestamp, `randomness_used: false`).

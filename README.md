@@ -43,6 +43,12 @@ $Q_{k}=Q_2=1,\;Q_{r+1}=1+(r-1)Q_r$:
 > **Lemma (path lemma).**  If $F$ is $r$-connected and $x\ne y\in V(F)$ then
 > $p_F(x,y)\ge Q_{r+1}$; for $r\ge3$ equality forces $F\cong K_{r+1}$.
 
+The $r\ge3$ hypothesis on the equality statement is not cosmetic: at $r=2$
+equality holds for *every cycle* ($C_4$ has $p(x,y)=2=Q_3$ but $C_4\ne K_3$).
+Row A″ above shows the $r=2$ equality cases are exactly the cycles, and it is
+what the Path Lemma's $r=3$ case is built on.  Theorem A never uses the Path
+Lemma's equality statement.
+
 ## Why This Is Interesting
 
 * **It is a clean dichotomy.**  Everything about the *minimum* number of cycles
@@ -65,6 +71,7 @@ $Q_{k}=Q_2=1,\;Q_{r+1}=1+(r-1)Q_r$:
 |---|--------|-----------|--------|
 | A | Sharp minimum | $\min\{c(G): G\ k\text{-conn}\}=c(K_{k+1})$, equality only at $K_{k+1}$ ($k\ge3$) | **theorem, proved** |
 | A′ | Recurrence | $Q_{k}=1,\;Q_{r+1}=1+(r-1)Q_r$ | **theorem, proved** |
+| A″ | Two paths | in 2-connected $H$, $p_H(a,b)\ge2$ and $p_H(a,b)=2\iff H$ is a cycle | **theorem, proved** |
 | B | Cone minimum | $c(K_1\vee F)\ge m(m-1)+1$ for 2-connected $F$ on $m$ vertices, equality iff $F\cong C_m$ | **theorem, proved** |
 | B′ | Dominating vertex | $c(G)\ge 1+(k-1)\binom{n-1}{2}$, equality only for $k=3$, $G=W_n$ | **theorem, proved** |
 | C | Finiteness | 3-connected $G$ with $c(G)\le K$ has $|V(G)|\le\lfloor 2(K-1)/(k-2)\rfloor$ | **theorem, proved** |
@@ -182,6 +189,17 @@ lower_bound(wheel(8))          # 43, attained: wheels are extremal
   3-connected cycle count is a construction problem we leave open.
 * **Enumeration is the ceiling, not the mathematics.**  Nothing in the proofs
   depends on computation; the computations merely confirm and measure.
+* **A proof gap was found and fixed, and we say so.**  In `v1.0.0` the Path
+  Lemma's `r = 3` equality case was *verified* but not *proved*: it leaned on
+  the `r = 2` equality statement, which is false.  `v1.0.1` proves the missing
+  ingredient (row A″) and redoes that case.  Theorem A was never affected.  The
+  full disclosure is in `docs/novelty_audit.md` §E and the `v1.0.1` release
+  notes.  We record it because the general lesson — an induction step can be
+  invalid at its first non-trivial index while the statement stays true — is
+  worth more than a silent repair.
+* **Novelty is "apparently new", not "first".**  We could not reach MathSciNet
+  or zbMATH, so the literature check is not exhaustive.  See
+  `docs/novelty_audit.md`.
 
 ## Related Work
 

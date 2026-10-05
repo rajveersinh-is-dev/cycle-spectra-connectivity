@@ -120,6 +120,7 @@ tried and what happened.
 | Can `S_3` contain something outside the conjectured exception list below 51? | No — our independent enumeration returns exactly the conjectured list. |
 | Does a 3-connected graph on 10 vertices have fewer cycles than $m_3(9) = 42$? | **Unknown**: the generator did not terminate in 50 minutes, so no value is reported. |
 | Is the "witness" for `S_1` cheap to verify? | First attempt used a **chain** of triangles; it is correct but a simple path can traverse every triangle, so the path count is exponential and `count_cycles` on 25 triangles took 54 s. Replaced by a **bouquet** (all triangles sharing one vertex): a simple path then uses at most two triangles, and the same count takes 0.6 ms at 200 triangles. Caught by the test suite timing out. |
+| Is the `r = 3` equality case of the path lemma *proved*, not just verified? | **It was not.** Red-teaming found that the proof invoked the `r = 2` equality statement, which is false, so `F - x = K_3` did not follow. Exhaustive verification had found no counterexample, so the statement is true but unproved. Fixed by proving the missing lemma (two paths in a 2-connected graph force a cycle) and redoing the `r = 3` case from it; the same pass caught the incorrect bound `Q_r >= Q_4 = 5` written where `Q_r >= Q_3 = 2` is needed. Both are now regression-tested and recorded in `novelty_audit.md` §E. |
 
 ## Reproducibility
 

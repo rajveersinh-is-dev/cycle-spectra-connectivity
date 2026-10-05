@@ -121,11 +121,53 @@ def stage2_theorem_a(max_n: int = 9) -> dict:
     }
 
 
+def stage2_two_connected_lemma(max_n: int = 8) -> dict:
+    """Lemma (paths in 2-connected graphs).
+
+    In a 2-connected graph ``H`` and for ``a != b``: ``p_H(a,b) >= 2``, and
+    ``p_H(a,b) == 2`` if and only if ``H`` is a cycle.  This is the statement the
+    Path Lemma's ``r = 3`` equality case rests on, so it is checked on the same
+    family as the Path Lemma itself.
+    """
+    print("stage 2a': paths in 2-connected graphs")
+    violations: list[dict] = []
+    checked_pairs = 0
+    cycles_seen = 0
+    for n in range(3, max_n + 1):
+        for g in two_connected_graphs(n):
+            # H is a cycle iff it is 2-regular with |E| = |V| and connected;
+            # 2-connected already gives connected and n >= 3.
+            is_cycle = g.m == n and g.min_degree == 2 and count_cycles(g) == 1
+            cycles_seen += int(is_cycle)
+            for x in range(n):
+                for y in range(x + 1, n):
+                    p = count_paths(g, x, y)
+                    checked_pairs += 1
+                    if p < 2 or (p == 2) != is_cycle:
+                        violations.append(
+                            {"n": n, "x": x, "y": y, "p": p, "is_cycle": is_cycle}
+                        )
+    print(
+        f"  pairs checked: {checked_pairs} ({cycles_seen} cycles), "
+        f"violations: {len(violations)}"
+    )
+    return {
+        "pairs_checked": checked_pairs,
+        "cycles_seen": cycles_seen,
+        "violations": violations,
+        "lemma_verified": not violations,
+    }
+
+
 def main(max_n: int = 8) -> dict:
     path = stage2_path_lemma(max_n=min(max_n, 8))
+    two = stage2_two_connected_lemma(max_n=min(max_n, 8))
     thm = stage2_theorem_a(max_n=max_n)
-    dump("path_lemma_and_theorem_a", {"path_lemma": path, "theorem_a": thm})
-    return {"path_lemma": path, "theorem_a": thm}
+    dump(
+        "path_lemma_and_theorem_a",
+        {"path_lemma": path, "two_connected_lemma": two, "theorem_a": thm},
+    )
+    return {"path_lemma": path, "two_connected_lemma": two, "theorem_a": thm}
 
 
 if __name__ == "__main__":

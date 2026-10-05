@@ -48,6 +48,14 @@ Sub-claim A3a: the recurrence `Q_2 = 1`, `Q_{r+1} = 1 + (r-1) Q_r`.
 **Label: obvious consequence** of `Q_m = (m-2)! · Σ_{i≤m-2} 1/i!`, proved in
 Appendix A of the paper.
 
+Sub-claim A3b (added after red-teaming; see §E, Reviewer D): if `H` is
+2-connected and `a ≠ b`, then `p_H(a,b) >= 2`, and `p_H(a,b) = 2` iff `H` is a
+cycle.  **Label: standard**, via Menger plus the `$C`-path` argument, and
+verified exhaustively on all 2-connected graphs with `n <= 7`.  This is the
+statement that makes the `r = 3` equality case of A3 go through, and it is
+*false* in the shape one would first guess (`r = 2` equality is every cycle, not
+just `K_3`).
+
 ### A4. Theorem A (sharp minimum)
 
 For `k >= 3`, `min{ c(G) : G k-connected } = c(K_{k+1})`, equality iff
@@ -174,3 +182,33 @@ missing (B3 above and Section 9 of the paper).
 > not find in the literature, plus an exact independent recomputation of a
 > current conjecture.  *Is it overclaimed?*  We removed the strongest phrasing
 > ("new"), labelled the path lemma folklore, and stated the open parts as open.
+
+> **Reviewer D (adversarial referee, pass 2 — a real gap that was found and
+> fixed).**  *Walk through the `r = 3` equality case of the Path Lemma.*  The
+> released proof used to say: equality forces `p_{F-x}(z,y) = Q_r`, and by the
+> induction hypothesis `F - x ≅ K_r`.  But at `r = 3` the induction hypothesis
+> is the `r = 2` case, where the equality statement is *false* (every cycle is an
+> equality case, and `C_4 ≠ K_3`).  So the argument was invalid for `r = 3`:
+> `F - x` is 2-connected with `p_{F-x}(z,y) = Q_3 = 2`, which does **not** force
+> `F - x = K_3`.  We had verified the *statement* by brute force over all
+> 3-connected graphs with `n <= 9` and found no counterexample, so the
+> statement is true — but the written proof did not establish it.
+>
+> **Fix.** Proved the missing ingredient as its own lemma (A3b above): in a
+> 2-connected graph, exactly two `a-b` paths forces a cycle.  Then the `r = 3`
+> case is: `F - x` is a cycle ⇒ every vertex of `F - x` has degree 2 there and,
+> since `delta(F) >= 3`, is adjacent to `x` ⇒ `|V(F - x)| = d_F(x) = 3` ⇒
+> `F = K_4`.  The `r >= 4` case keeps the induction.  The paper states
+> explicitly that Theorem A does *not* depend on this equality statement, so
+> Theorem A was never affected.
+>
+> **Second defect found in the same pass.** The exclusion of `xy ∉ E(F)` was
+> written as "`Q_r >= Q_4 = 5 > 1`", which is wrong at `r = 3` (where
+> `Q_r = Q_3 = 2`).  The needed bound is `Q_r >= Q_3 = 2 > 1`; corrected.
+>
+> Both fixes are covered by regression tests
+> (`tests/test_theorems.py::test_paths_in_two_connected_graphs`,
+> `::test_path_lemma_equality_fails_for_r_eq_2`).  The lesson we record:
+> *exhaustive verification of a statement does not license a proof of it, and an
+> induction step can quietly be invalid at its first non-trivial index while
+> remaining true.*  Read the base cases of inductions explicitly.

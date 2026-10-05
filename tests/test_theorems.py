@@ -77,6 +77,50 @@ def test_path_lemma_equality_fails_for_r_eq_2():
     assert c4.m != 4 * 3 // 2
 
 
+@pytest.mark.parametrize("n", [4, 5, 6, 7])
+def test_paths_in_two_connected_graphs(n):
+    """Lemma (paths in 2-connected graphs).
+
+    For a 2-connected graph ``H`` and any ``a != b``: ``p_H(a,b) >= 2``, and
+    ``p_H(a,b) == 2`` if and only if ``H`` is a cycle.  This is the statement
+    that makes the ``r = 3`` case of the Path Lemma's equality analysis work.
+
+    "H is a cycle" is detected combinatorially as ``H`` connected, 2-regular
+    and with ``|E| = |V|``, which is exactly a single cycle for simple graphs.
+    """
+    checked_pairs = 0
+    for g in two_connected_graphs(n):
+        assert vertex_connectivity(g) >= 2
+        is_cycle = g.m == n and g.min_degree == 2 and count_cycles(g) == 1
+        for x in range(n):
+            for y in range(x + 1, n):
+                p = count_paths(g, x, y)
+                checked_pairs += 1
+                # p_H(a,b) >= 2
+                assert p >= 2, (n, x, y, p)
+                # p_H(a,b) = 2  <=>  H is a cycle
+                assert (p == 2) == is_cycle, (n, x, y, p, is_cycle)
+    assert checked_pairs > 0
+
+
+def test_two_connected_lemma_examples():
+    """Hand checks of the 2-connected path lemma on named graphs."""
+    from cycle_spectra import cycle_graph, theta_graph
+
+    for n in (3, 4, 5, 8):
+        g = cycle_graph(n)
+        for x in range(n):
+            for y in range(x + 1, n):
+                assert count_paths(g, x, y) == 2
+    # A theta graph has exactly three a-b paths between its two poles.
+    theta = theta_graph((1, 2, 2))
+    assert theta.n == 4
+    assert vertex_connectivity(theta) == 2
+    assert count_paths(theta, 0, 1) == 3
+    # And more than 2 for an internal pair, so 'p = 2' really does force a cycle.
+    assert count_paths(theta, 2, 3) == 4
+
+
 @pytest.mark.parametrize("n", [4, 5, 6, 7, 8, 9])
 def test_theorem_A_on_all_three_connected_graphs(n):
     """c(G) >= c(K_{k+1}) for k = 3, with equality only for K_4."""

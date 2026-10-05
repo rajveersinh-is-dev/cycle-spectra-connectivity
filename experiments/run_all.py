@@ -59,6 +59,11 @@ def summarise(results: dict) -> None:
         f"**{thm['theorem_a_verified']}**\n")
     add(f"Pairs (x,y) checked for the Path Lemma: **{pl['pairs_checked']}**, "
         f"violations: **{len(pl['violations'])}**\n")
+    two = results["theorems"].get("two_connected_lemma")
+    if two is not None:
+        add(f"Pairs (x,y) checked for the 2-connected path lemma: "
+            f"**{two['pairs_checked']}** ({two['cycles_seen']} cycles), "
+            f"violations: **{len(two['violations'])}**\n")
     add("`Q_k` (paths between two vertices of the complete graph `K_k`):\n")
     add("| k | " + " | ".join(str(k) for k in sorted(pl["Q_table"], key=int)) + " |")
     add("|---|" + "---:|" * len(pl["Q_table"]))

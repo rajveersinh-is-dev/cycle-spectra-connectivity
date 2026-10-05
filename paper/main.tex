@@ -218,6 +218,11 @@ did not find a prior source stating it with this constant.  The
 \emph{recurrence} $Q_{r+1}=1+(r-1)Q_r$ is a routine identity
 (Appendix~\ref{app:identities}).\\
 \addlinespace
+Lemma~\ref{lem:two} (two paths in a $2$-connected graph) &
+\textbf{Standard.}  It is Menger's theorem together with the classical
+``$C$-path'' argument; we spell it out because the Path Lemma needs it at
+$r=3$.\\
+\addlinespace
 Theorem A & \textbf{Apparently new.}  We did not find a prior result
 establishing $\min\{c(G): G\ k\text{-connected}\}=\cKn{k+1}$.  It may exist as a
 textbook exercise; we could not verify either way.\\
@@ -377,47 +382,122 @@ $E_t:=\sum_{i=0}^{t}1/i!$ we get $Q_m=(m-2)!\,E_{m-2}$, whence
 \]
 \end{proof}
 
+\begin{lemma}[paths in 2-connected graphs]\label{lem:two}
+Let $H$ be a $2$-connected graph and let $a\ne b$ be vertices of $H$.  Then
+$p_H(a,b)\ge 2$, and
+\[
+  p_H(a,b)=2 \quad\Longleftrightarrow\quad H \text{ is a cycle.}
+\]
+\end{lemma}
+
+\begin{proof}
+The inequality is Menger's theorem.
+
+For the characterisation, assume $p_H(a,b)=2$ and let $P_1,P_2$ be the two
+$a$-$b$ paths.  Their union is a cycle $C$: $P_1$ and $P_2$ meet only in $a$ and
+$b$, so $E(P_1)\cup E(P_2)$ is a cycle's edge set, and in particular
+$E(P_1),E(P_2)\subseteq E(C)$.  Suppose $H\ne C$, so some component $W$ of
+$H-V(C)$ is non-empty.
+
+\emph{Claim 1.} $|N(W)\cap V(C)|\ge 2$.  Let $S=N(W)\cap V(C)$.  We have
+$S\ne\emptyset$, because $W$ is a union of components of $H-V(C)$ and $H$ is
+connected.  If $S=\{u\}$, then no vertex of $W$ is adjacent to
+$V(C)\setminus\{u\}$, and $V(C)\setminus\{u\}\ne\emptyset$ because $C$ has at
+least three vertices; hence $W$ and $V(C)\setminus\{u\}$ are two disjoint
+non-empty sets with no edge between them, so $H-u$ is disconnected --- against
+$2$-connectivity.
+
+By Claim 1, take $u\ne v$ in $N(W)\cap V(C)$, vertices $u'\in W$ adjacent to
+$u$ and $v'\in W$ adjacent to $v$, and a $u'$-$v'$ path inside the connected
+graph $W$ (a single vertex if $u'=v'$).  Adjoining $uu'$ and $vv'$ gives a path
+$P$ from $u$ to $v$ all of whose internal vertices lie in $W$, hence outside $C$.
+In particular $P$ has an internal vertex, so $E(P)\cap E(C)=\emptyset$ and
+$E(P)\ne\emptyset$.
+
+\emph{Claim 2.} $C\cup E(P)$ contains an $a$-$b$ path using an edge of $P$.
+Write $A_1,A_2$ for the two $C$-arcs from $u$ to $v$.  Because $P$ meets $C$
+only in its endpoints, $C_1:=A_1\cup P$ and $C_2:=A_2\cup P$ are both cycles,
+they intersect exactly in $P$ together with $\{u,v\}$, and
+$V(C_1)\cup V(C_2)=V(C)$.
+\begin{itemize}[leftmargin=1.4em,nosep]
+\item If $a$ and $b$ both lie on $C_i$ for some $i\in\{1,2\}$, the two $a$-$b$
+  arcs of the cycle $C_i$ partition $E(C_i)$, which contains the non-empty set
+  $E(P)$; so one of the two arcs uses an edge of $P$, and is the required path.
+\item Otherwise, after exchanging the roles of $A_1,A_2$ we have
+  $a\in V(A_1)\setminus\{u,v\}$ and $b\in V(A_2)\setminus\{u,v\}$, and
+  \[
+    a\ \xrightarrow{\;A_1\;}\ u\ \xrightarrow{\;P\;}\ v\ \xrightarrow{\;A_2\;}\ b
+  \]
+  is an $a$-$b$ path: the three segments are pairwise disjoint in vertices
+  except at the junctions $u,v$, because $A_1$ and $A_2$ share only $u,v$, and
+  the internal vertices of $P$ are outside $C$.  It uses edges of $P$.
+\end{itemize}
+
+The path from Claim 2 uses an edge of $P$, which by the above is no edge of
+$C$, so it is different from $P_1$ and $P_2$.  This contradicts
+$p_H(a,b)=2$, and therefore $H=C$ is a cycle.  Conversely, in a cycle the two
+arcs between $a$ and $b$ are its only $a$-$b$ paths.
+\end{proof}
+
+Lemma~\ref{lem:two} is also why the equality statement below needs the
+hypothesis $r\ge 3$: for $r=2$ the equality case is \emph{every} cycle, not just
+$K_3$.  The example $C_4$ is kept as a regression test in the accompanying
+code.  Lemma~\ref{lem:two} itself was checked on every vertex pair of every
+$2$-connected graph of order at most $8$: $210\,233$ pairs, $0$ violations,
+with $p_H(a,b)=2$ occurring exactly for the cycles.
+
 \begin{lemma}[path lemma]\label{lem:path}
 Let $F$ be an $r$-connected graph ($r\ge 1$) and let $x\ne y$ be vertices of
 $F$.  Then
 \begin{equation}\label{eq:pathlemma}
   p_F(x,y)\ \ge\ Q_{r+1},
 \end{equation}
-with equality only when $r\ge 3$ and $F\cong K_{r+1}$.
+and, if $r\ge 3$, equality holds only for $F\cong K_{r+1}$.
 \end{lemma}
 
 \begin{proof}
 Induct on $r$.  For $r=1$, $F$ is connected, so at least one $x$-$y$ path
 exists, and $Q_2=1$.
 
-Let $r\ge 2$ and assume the statement for $r-1$.  Then $F-x$ is
-$(r-1)$-connected, so for every $z\ne x,y$ the induction hypothesis gives
+Let $r\ge 2$ and assume the inequality for $r-1$.  Then $F-x$ is
+$(r-1)$-connected with at least $r$ vertices, so for every $z\ne x,y$ we have
 $p_{F-x}(z,y)\ge Q_r$.  Classifying $x$-$y$ paths by the first edge after $x$,
-with the edge $xy$ separated off, yields
+with the edge $xy$ separated off, gives
 \begin{align*}
  p_F(x,y)
   &= \nk{xy\in E(F)} + \sum_{z\in N_F(x)\setminus\{y\}} p_{F-x}(z,y)\\
   &\ge \nk{xy\in E(F)} + \bigl(d_F(x)-\nk{xy\in E(F)}\bigr)Q_r\\
   &\ge \nk{xy\in E(F)} + \bigl(r-\nk{xy\in E(F)}\bigr)Q_r ,
 \end{align*}
-because $d_F(x)\ge r$.  If $xy\in E(F)$ this is $1+(r-1)Q_r=Q_{r+1}$ by
+using $d_F(x)\ge r$.  If $xy\in E(F)$ this is $1+(r-1)Q_r=Q_{r+1}$ by
 Lemma~\ref{lem:rec}.  If $xy\notin E(F)$ it is
-$rQ_r = Q_{r+1}+(Q_r-1)\ge Q_{r+1}$ since $Q_r\ge 1$.
+$rQ_r = Q_{r+1}+(Q_r-1)\ge Q_{r+1}$, since $Q_r\ge 1$.
 
-Suppose now that $r\ge 3$ and equality holds.  The case $xy\notin E(F)$ is
-then strict, because $Q_r\ge Q_4=5>1$.  So $xy\in E(F)$, and equality forces
-$d_F(x)=r$ together with $p_{F-x}(z,y)=Q_r$ for every
-$z\in N_F(x)\setminus\{y\}$; such a $z$ exists because $d_F(x)\ge r\ge 3$.
-By induction $F-x\cong K_r$, which has exactly $r$ vertices, and since
-$d_F(x)=r$ with $xy\in E(F)$ the vertex $x$ is adjacent to all of them; hence
+Now suppose $r\ge3$ and $p_F(x,y)=Q_{r+1}$, so equality holds throughout.
+The case $xy\notin E(F)$ is then impossible, because $Q_r\ge Q_3=2>1$.  Hence
+$xy\in E(F)$, $d_F(x)=r$, and
+\[
+  p_{F-x}(z,y)=Q_r \quad\text{for every } z\in N_F(x)\setminus\{y\},
+\]
+a set which is non-empty because $r\ge3$.
+
+\emph{Case $r\ge4$.}  Then $r-1\ge3$ and the induction hypothesis applies to
+$F-x$: it is $(r-1)$-connected, so $F-x\cong K_r$.  Thus $F$ has $r+1$
+vertices, and $d_F(x)=r$ forces $x$ to be adjacent to all of them; hence
 $F\cong K_{r+1}$.
 
-For $r=2$ the inequality is sharp but the equality statement is not: in the
-cycle $C_4$ adjacent vertices satisfy $p_{C_4}(x,y)=2=Q_3$ although
-$C_4\not\cong K_3$.  This is why the equality statement carries the hypothesis
-$r\ge 3$; the example is recorded as a regression test in the accompanying
-code, so that the weaker formulation is not silently assumed later.
+\emph{Case $r=3$.}  Then $r-1=2$ and Lemma~\ref{lem:two} applies: $F-x$ is
+$2$-connected and $p_{F-x}(z,y)=Q_3=2$ for some $z\in N_F(x)\setminus\{y\}$,
+so $F-x$ is a cycle.  Every vertex of $F-x$ therefore has degree exactly $2$
+inside $F-x$; since $\delta(F)\ge 3$, each of them must be adjacent to $x$.  As
+$d_F(x)=3$, the cycle $F-x$ has at most $3$ vertices, hence exactly $3$, and
+$F$ has $4$ vertices and minimum degree at least $3$; being simple, $F=K_4$.
 \end{proof}
+
+Note that Theorem~\ref{thm:A} below does \emph{not} need this equality
+statement: its own equality analysis follows from the induction hypothesis
+together with a degree count.  We include the statement because it is the
+sharp form of the lemma and because the two ranges behave differently.
 
 Lemma~\ref{lem:path} is verified exhaustively in Section~\ref{sec:comp}: for
 every $2$-connected graph of order at most $8$ and every pair of vertices,
@@ -780,10 +860,21 @@ We are explicit about what this paper does not establish.
   minima $c(K_5)=37$ and $c(K_6)=197$ for those classes, but the exception sets
   of $S_4$ are undetermined.
 \item[Equality in Lemma~\ref{lem:path} for $r=2$.]  The bound
-  $p_F(x,y)\ge Q_3=2$ is sharp, but equality is achieved by every $2$-connected
-  graph in which $x$ and $y$ are joined by exactly two paths, a large and
-  structurally unclassified class containing all cycles.  Theorem~\ref{thm:A}
-  avoids this case by using $\delta(G)\ge 3$ in the inductive step.
+  $p_F(x,y)\ge Q_3=2$ is sharp, but equality is achieved by every cycle, not
+  only by $K_3$, so the equality statement of Lemma~\ref{lem:path} is stated
+  only for $r\ge3$.  Lemma~\ref{lem:two} shows that within the class of
+  $2$-connected graphs the equality cases are *exactly* the cycles, so this is
+  a genuine exception to the `r >= 3` pattern rather than an unclassified
+  family.  Theorem~\ref{thm:A} avoids the case altogether by using
+  $\delta(G)\ge3$ in the inductive step.
+\item[A proof gap was found by red-teaming and fixed, not hidden.]  An earlier
+  version of Lemma~\ref{lem:path} justified its `r=3` equality case by the
+  induction hypothesis, i.e.\ by the `r=2` equality statement --- which is
+  false.  The statement survived exhaustive verification on all $3$-connected
+  graphs of order at most $9$ (no counterexample), but the proof did not
+  establish it.  The missing ingredient is Lemma~\ref{lem:two}, and the `r=3`
+  case is now proved from it.  Both facts are recorded in
+  \texttt{docs/novelty\_audit.md}, §E.
 \item[No claim about the existence direction of Conjecture 6(a).]  Showing
   that every $m\ge 35$ is the cycle count of some $3$-connected graph is a
   construction problem that we did not attack; our computation only certifies
@@ -947,9 +1038,11 @@ $|V(F)|\ge 3$.
   canonical labels}, for both connectivity classes and $n\le 6$ inside the test
   suite, and for $n\le 7$ via \texttt{scripts/validate\_generators.py}.
 \item Lemma~\ref{lem:path} holds on all pairs of vertices of all
-  $2$-connected graphs with $n\le 7$, with its equality condition checked
-  exhaustively for $r\ge 3$ and a recorded counterexample to the naive
-  statement at $r=2$.
+  $2$-connected graphs with $n\le 7$ inside the test suite, and on all
+  $2$-connected graphs with $n\le 8$ in the pipeline ($210\,233$ pairs),
+  with its equality condition checked exhaustively for $r\ge 3$ and a
+  recorded counterexample to the naive statement at $r=2$.
+  Lemma~\ref{lem:two} is checked the same way on the same families.
 \item Theorem~\ref{thm:A} and Corollary~\ref{cor:wheel} hold on all
   $3$-connected graphs with $n\le 9$.
 \item Conjecture~\ref{conj:sharp} holds on all $3$-connected graphs with

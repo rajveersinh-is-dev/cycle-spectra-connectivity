@@ -17,6 +17,10 @@ First public release.  No prior public version, no claim of peer review.
   where `Q_k` is the number of paths between two vertices of `K_k`; equality for
   `r >= 3` forces `F = K_{r+1}`.  Verified on 210 233 vertex pairs with no
   violation.
+- **Lemma (paths in 2-connected graphs).**  In a 2-connected graph `H` and for
+  `a != b`, `p_H(a,b) >= 2` and `p_H(a,b) = 2` iff `H` is a cycle.  This
+  classifies the `r = 2` equality cases and supplies the `r = 3` case of the
+  path lemma; verified exhaustively for `n <= 7`.
 - **Lemma (recurrence).**  `Q_2 = 1` and `Q_{r+1} = 1 + (r-1) Q_r`.
 - **Lemma (cone identity).**  `c(G) = c(G - v) + sum over pairs in N(v) of
   p_{G-v}(x,y)`.
@@ -45,10 +49,12 @@ First public release.  No prior public version, no claim of peer review.
 
 ### Infrastructure
 
-- 92 tests covering primitives, generators, bounds, spectra and the stated
+- 97 tests covering primitives, generators, bounds, spectra and the stated
   theorems; the suite runs in about three minutes.
 - `experiments/run_all.py` writes JSON results with a provenance block
   (versions, git commit, timestamp, `randomness_used: false`).
+- `scripts/check_paper.py` statically validates `paper/main.tex` (brace balance,
+  environment matching, dangling `\ref`/`\cite`, missing figures).
 - Paper `paper/main.tex` compiles standalone; no BibTeX required.
 
 [1.0.0]: https://github.com/daveaddams91-dev/cycle-spectra-connectivity/releases/tag/v1.0.0

@@ -32,6 +32,8 @@ Theorem A verified exhaustively on the enumerated classes: **True**
 
 Pairs (x,y) checked for the Path Lemma: **210233**, violations: **0**
 
+Pairs (x,y) checked for the 2-connected path lemma: **210233** (6 cycles), violations: **0**
+
 `Q_k` (paths between two vertices of the complete graph `K_k`):
 
 | k | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
@@ -81,8 +83,8 @@ numpy: 2.4.6
 networkx: 3.6.1
 igraph: 1.0.0
 matplotlib: 3.11.1
-git_commit: d68560e47f850b94a698bebf264f0666edacae67
+git_commit: ae9c79ae580deea0b9bbafbf3c36a9525e9693bd
 seed: 0
 randomness_used: False
-timestamp_utc: 2026-10-05T05:46:52Z
+timestamp_utc: 2026-10-05T06:19:50Z
 ```

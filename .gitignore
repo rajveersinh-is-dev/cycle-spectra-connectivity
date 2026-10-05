@@ -12,4 +12,5 @@ paper/*.toc
 # The compiled paper is tracked on purpose (added by the author); ignore only
 # intermediate build artefacts from local pdflatex runs.
 !paper/main.pdf
+paper/_build/
 results/tmp*

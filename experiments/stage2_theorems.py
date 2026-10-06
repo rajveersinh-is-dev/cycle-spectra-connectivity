@@ -31,6 +31,15 @@ def q_by_recurrence(k: int) -> int:
 
 
 def stage2_path_lemma(max_n: int = 8) -> dict:
+    """Stage2 path lemma.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        dict: Result of type dict
+    
+    """
     print("stage 2a: Path Lemma")
     q_table = {k: Q(k) for k in range(2, 10)}
     rec_ok = all(Q(k) == q_by_recurrence(k) for k in q_table)
@@ -78,6 +87,15 @@ def stage2_path_lemma(max_n: int = 8) -> dict:
 
 
 def stage2_theorem_a(max_n: int = 9) -> dict:
+    """Stage2 theorem a.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        dict: Result of type dict
+    
+    """
     print("stage 2b: Theorem A")
     best: dict[int, dict] = {}
     per_order: dict[str, dict] = {}
@@ -160,6 +178,15 @@ def stage2_two_connected_lemma(max_n: int = 8) -> dict:
 
 
 def main(max_n: int = 8) -> dict:
+    """Entry point — parse arguments and run the main computation.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        dict: Result of type dict
+    
+    """
     path = stage2_path_lemma(max_n=min(max_n, 8))
     two = stage2_two_connected_lemma(max_n=min(max_n, 8))
     thm = stage2_theorem_a(max_n=max_n)

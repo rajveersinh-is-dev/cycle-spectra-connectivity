@@ -11,6 +11,15 @@ from cycle_spectra import three_connected_graphs, two_connected_graphs
 
 
 def main(max_n: int = 9) -> dict:
+    """Entry point — parse arguments and run the main computation.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        The computed result
+    
+    """
     two = {}
     three = {}
     timings = {"two_connected": {}, "three_connected": {}}

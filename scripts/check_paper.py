@@ -12,9 +12,10 @@ Run from the repository root:
 
 from __future__ import annotations
 
+from pathlib import Path
 import re
 import sys
-from pathlib import Path
+
 
 ROOT = Path(__file__).resolve().parent.parent
 PAPER = ROOT / "paper" / "main.tex"
@@ -41,6 +42,15 @@ def strip_comments(text: str) -> str:
 
 
 def check_braces(text: str) -> list[str]:
+    """Check whether braces.
+    
+    Args:
+        text:
+    
+    Returns:
+        list: Result of type list
+    
+    """
     depth = 0
     for lineno, line in enumerate(text.splitlines(), start=1):
         i = 0
@@ -66,6 +76,15 @@ END = re.compile(r"\\end\{([^}]*)\}")
 
 
 def check_environments(text: str) -> list[str]:
+    """Check whether environments.
+    
+    Args:
+        text:
+    
+    Returns:
+        The computed result
+    
+    """
     stack: list[tuple[str, int]] = []
     problems: list[str] = []
     for lineno, line in enumerate(text.splitlines(), start=1):
@@ -89,10 +108,28 @@ def check_environments(text: str) -> list[str]:
 
 
 def all_labels(text: str) -> set[str]:
+    """All labels.
+    
+    Args:
+        text:
+    
+    Returns:
+        set: Result of type set
+    
+    """
     return set(re.findall(r"\\label\{([^}]*)\}", text))
 
 
 def all_refs(text: str) -> set[str]:
+    """All refs.
+    
+    Args:
+        text:
+    
+    Returns:
+        The computed result
+    
+    """
     refs = set()
     for m in re.finditer(r"\\(?:eq)?ref\*?\{([^}]*)\}", text):
         refs.add(m.group(1))
@@ -102,6 +139,15 @@ def all_refs(text: str) -> set[str]:
 
 
 def all_cites(text: str) -> set[str]:
+    """All cites.
+    
+    Args:
+        text:
+    
+    Returns:
+        The computed result
+    
+    """
     cites: set[str] = set()
     for m in re.finditer(r"\\cite[a-zA-Z]*\{([^}]*)\}", text):
         for key in m.group(1).split(","):
@@ -112,10 +158,28 @@ def all_cites(text: str) -> set[str]:
 
 
 def bib_keys(text: str) -> set[str]:
+    """Bib keys.
+    
+    Args:
+        text:
+    
+    Returns:
+        set: Result of type set
+    
+    """
     return set(re.findall(r"\\bibitem(?:\[[^\]]*\])?\{([^}]*)\}", text))
 
 
 def check_figures(text: str) -> list[str]:
+    """Check whether figures.
+    
+    Args:
+        text:
+    
+    Returns:
+        The computed result
+    
+    """
     problems = []
     for m in re.finditer(r"\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}", text):
         target = (PAPER.parent / m.group(1)).resolve()
@@ -125,6 +189,12 @@ def check_figures(text: str) -> list[str]:
 
 
 def main() -> int:
+    """Entry point — parse arguments and run the main computation.
+    
+    Returns:
+        int: Result of type int
+    
+    """
     if not PAPER.exists():
         print(f"FAIL: {PAPER} not found")
         return 1

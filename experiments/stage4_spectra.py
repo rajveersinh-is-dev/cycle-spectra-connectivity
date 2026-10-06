@@ -35,6 +35,15 @@ BOUND = 50
 
 
 def main(max_n: int = 9) -> dict:
+    """Entry point — parse arguments and run the main computation.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        The computed result
+    
+    """
     print("stage 4: spectra")
     # ---- S_1 -------------------------------------------------------------
     # A bouquet of t triangles is connected and has exactly t cycles, so S_1 is

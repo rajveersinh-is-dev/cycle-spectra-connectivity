@@ -6,6 +6,8 @@ import json
 
 from common import FIGURES, ROOT, setup_matplotlib
 
+
+
 plt = setup_matplotlib()
 
 COLOUR = {
@@ -18,6 +20,15 @@ COLOUR = {
 
 
 def _load(name: str) -> dict:
+    """Load and parse input data.
+    
+    Args:
+        name:
+    
+    Returns:
+        The computed result
+    
+    """
     return json.loads((ROOT / "results" / f"{name}.json").read_text(encoding="utf-8"))
 
 
@@ -191,6 +202,12 @@ def fig_growth() -> str:
 
 
 def main() -> list[str]:
+    """Entry point — parse arguments and run the main computation.
+    
+    Returns:
+        list: Result of type list
+    
+    """
     print("stage 6: figures")
     FIGURES.mkdir(parents=True, exist_ok=True)
     return [

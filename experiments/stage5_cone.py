@@ -26,6 +26,15 @@ def cone(base: Graph) -> Graph:
 
 
 def main(max_n: int = 8) -> dict:
+    """Entry point — parse arguments and run the main computation.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        The computed result
+    
+    """
     print("stage 5: cone theorem")
     rows = []
     identity_ok = True

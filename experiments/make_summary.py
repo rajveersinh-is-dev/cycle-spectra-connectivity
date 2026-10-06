@@ -7,14 +7,16 @@ computations, e.g. after editing the formatting.  All numbers are read from
 
 from __future__ import annotations
 
+from pathlib import Path
 import json
 import sys
-from pathlib import Path
+
+from run_all import summarise  # noqa: E402
+import common  # noqa: E402
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import common  # noqa: E402
-from run_all import summarise  # noqa: E402
 
 FILES = {
     "cardinalities": "cardinalities",
@@ -26,6 +28,9 @@ FILES = {
 
 
 def main() -> None:
+    """Entry point — parse arguments and run the main computation.
+    
+    """
     results = {}
     for key, name in FILES.items():
         results[key] = json.loads((common.RESULTS / f"{name}.json").read_text(encoding="utf-8"))

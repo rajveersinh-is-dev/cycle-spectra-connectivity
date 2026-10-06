@@ -123,6 +123,9 @@ def summarise(results: dict) -> None:
 
 
 def main() -> None:
+    """Entry point — parse arguments and run the main computation.
+    
+    """
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--max-n", type=int, default=9, help="largest order to enumerate")
     ap.add_argument("--skip-figures", action="store_true")

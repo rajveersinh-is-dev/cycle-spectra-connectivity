@@ -17,6 +17,15 @@ from cycle_spectra import c_complete, count_cycles, three_connected_graphs, whee
 
 
 def main(max_n: int = 9) -> dict:
+    """Entry point — parse arguments and run the main computation.
+    
+    Args:
+        max_n (int):
+    
+    Returns:
+        The computed result
+    
+    """
     print("stage 3: extremal function m_3(n)")
     rows = []
     for n in range(4, max_n + 1):

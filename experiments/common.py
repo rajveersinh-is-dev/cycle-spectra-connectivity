@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 import platform
 import subprocess
 import sys
@@ -68,12 +67,24 @@ class Timer:
     """Context manager writing ``{'seconds': ..., 'started': ...}``."""
 
     def __init__(self) -> None:
+        """Init.
+        
+        """
         self.t0 = time.time()
 
     def __enter__(self) -> "Timer":
+        """Enter.
+        
+        Returns:
+            The computed result
+        
+        """
         return self
 
     def __exit__(self, *exc: object) -> None:
+        """Exit.
+        
+        """
         self.seconds = time.time() - self.t0
 
 
@@ -88,6 +99,12 @@ def dump(name: str, payload: dict[str, Any]) -> Path:
 
 
 def setup_matplotlib():
+    """Setup matplotlib.
+    
+    Returns:
+        The computed result
+    
+    """
     import matplotlib
 
     matplotlib.use("Agg")
